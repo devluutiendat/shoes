@@ -52,6 +52,7 @@ export class UserController {
 
   @Put(':id')
   @ApiOperation({ summary: 'Update user by ID' })
+  @ApiBody({ type: UpdateUserDto })
   @ApiParam({ name: 'id', type: Number })
   @ApiBody({ type: UpdateUserDto })
   @ApiResponse({ status: 200, description: 'User updated successfully.' })
