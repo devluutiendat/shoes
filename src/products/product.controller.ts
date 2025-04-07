@@ -72,7 +72,7 @@ export class ProductsController {
   @ApiResponse({ status: 404, description: 'Product not found.' })
   @HttpCode(HttpStatus.OK)
   findOne(@Param('id') id: number) {
-    return this.productsService.findById(+id);
+    return this.productsService.getProductById(+id);
   }
 
   @Put(':id')

@@ -38,7 +38,7 @@ export class ProductService {
     }
   }
   
-  async findById(id: number) {
+  async getProductById(id: number) {
     try {
       const product = await this.prisma.product.findUnique({
         where: { id },
@@ -94,7 +94,7 @@ export class ProductService {
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
-    await this.findById(id);
+    await this.getProductById(id);
     try {
       const product = await this.prisma.product.update({
         where: { id },
@@ -109,7 +109,7 @@ export class ProductService {
   }
 
   async remove(id: number) {
-    await this.findById(id);
+    await this.getProductById(id);
     try {
       return await this.prisma.product.delete({
         where: { id },
