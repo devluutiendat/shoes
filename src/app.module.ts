@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { QueueModule } from './queues/queue.module';
 import { BullModule } from '@nestjs/bull';
 import { UserModule } from './users/user.module';
+import { ImageModule } from './images/image.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -20,6 +21,7 @@ import { UserModule } from './users/user.module';
         port: 6379,
       },
     }),
+    ImageModule,
     AuthModule,
     UserModule,
     OrdersModule,
