@@ -11,6 +11,7 @@ import { QueueModule } from './queues/queue.module';
 import { BullModule } from '@nestjs/bull';
 import { UserModule } from './users/user.module';
 import { ImageModule } from './images/image.module';
+import { ReviewModule } from './reviews/review.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -22,6 +23,7 @@ import { ImageModule } from './images/image.module';
       },
     }),
     ImageModule,
+    ReviewModule,
     AuthModule,
     UserModule,
     OrdersModule,
