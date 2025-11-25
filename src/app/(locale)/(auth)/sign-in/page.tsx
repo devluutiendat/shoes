@@ -1,19 +1,16 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { login } from "@/api/auth";
 import { useRouter } from "next/navigation";
-const loginSchema = z.object({
-  email: z.string().email("Invalid email format"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
-});
+import { loginSchema } from "@/lib/validate";
+import { loginUser } from "@/lib/actions/auth";
+import { login } from "@/types";
 
 export default function LoginForm() {
   const {
@@ -27,9 +24,9 @@ export default function LoginForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (data: { email: string; password: string }) => {
+  const onSubmit = async (data: login) => {
     try {
-      await login(data.email, data.password);
+      await loginUser(data);
       setLoading(true);
       toast.success("Login successful!");
       router.push("/");

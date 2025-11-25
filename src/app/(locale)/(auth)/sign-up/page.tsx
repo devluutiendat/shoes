@@ -1,29 +1,16 @@
 "use client";
-import "../globals.css";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { registerUser } from "@/api/auth";
 import { useRouter } from "next/navigation";
-
-const formSchema = z.object({
-  email: z
-    .string()
-    .email("Invalid email format")
-    .refine((val) => !val.includes(" "), "Email cannot contain spaces"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
-  phone: z
-    .string()
-    .regex(/^[0-9]{10,15}$/, "Phone number must contain 10-15 digits"),
-  name: z.string().min(1, "Name is required"),
-});
+import { registerUser } from "@/lib/actions/auth";
+import { registerSchema } from "@/lib/validate";
 
 export default function RegisterForm() {
   const {
@@ -31,7 +18,7 @@ export default function RegisterForm() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(registerSchema),
   });
 
   const router = useRouter();
@@ -54,7 +41,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto mt-10">
+    <Card className="w-full max-w-md mx-auto ">
       <CardHeader>
         <CardTitle>Register</CardTitle>
       </CardHeader>

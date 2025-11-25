@@ -36,7 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="py-14">{children}</main>
+          <main>{children}</main>
         </ThemeProvider>
       </body>
     </html>

@@ -1,31 +1,27 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  // const token = request.cookies.get("accessToken")?.value;
+  const token = request.cookies.get("accessToken")?.value;
 
-  // const publicRoutes = ["/login", "/register"];
-  // if (
-  //   request.nextUrl.pathname.startsWith("/_next") ||
-  //   request.nextUrl.pathname.startsWith("/static") ||
-  //   request.nextUrl.pathname.endsWith(".css") ||
-  //   request.nextUrl.pathname.endsWith(".js")
-  // ) {
-  //   return NextResponse.next();
-  // }
-    
-  // if (!token && !publicRoutes.includes(request.nextUrl.pathname)) {
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
+  const publicRoutes = ["/login", "/register"];
 
-  // // Allow Next.js static assets (like CSS, images, and fonts) to load
+  const { pathname } = request.nextUrl;
 
-  // if (!token && !publicRoutes.includes(request.nextUrl.pathname)) {
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/static") ||
+    pathname.match(/\.(css|js|png|jpg|jpeg|svg|ico)$/)
+  ) {
+    return NextResponse.next();
+  }
+
+  if (!token && !publicRoutes.includes(pathname)) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   return NextResponse.next();
 }
+
 
 export const config = {
   matcher: ["/:path*"],
