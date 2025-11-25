@@ -5,8 +5,8 @@ import { getAllProducts } from "@/api/product";
 import { PriceSort, Product } from "@/interface/productDto";
 import SearchBar from "../SearchBar";
 import SortDropdown from "../SortDropdown";
-import ProductCard from "@/components/ProductCard";
-import Pagination from "@/components/Pagination";
+import ProductCard from "@/components/shared/ProductCard";
+import Pagination from "@/components/shared/Pagination";
 import Loading from "@/app/loading";
 
 export default function Products() {

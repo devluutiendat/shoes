@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Pagination from "@/components/Pagination";
+import Pagination from "@/components/shared/Pagination";
 import { Review } from "@/interface/reviewDto";
 
 interface ReviewListProps {
