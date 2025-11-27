@@ -1,3 +1,4 @@
+import Footer from "@/components/shared/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -25,13 +26,6 @@ export default async function AuthLayout({
         </Link>
       </header>
       <main className="mx-auto max-w-sm min-w-80 p-4">{children}</main>
-      <footer className=" flex-1 mt-8  bg-gray-800 w-full flex flex-col gap-4 items-center p-4 text-sm">
-        <div className="flex justify-center space-x-4">
-          <Link href="/page/conditions-of-use">Conditions of Use</Link>
-          <Link href="/page/privacy-policy"> Privacy Notice</Link>
-          <Link href="/page/help"> Help </Link>
-        </div>
-      </footer>
     </div>
   );
 }

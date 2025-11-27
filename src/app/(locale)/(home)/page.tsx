@@ -1,30 +1,15 @@
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
-import Loading from "../loading";
-import Banner from "@/components/home/sections/Banner";
+import BestSeller from "@/components/shared/BestSeller";
+import Hero from "@/components/shared/Hero";
+import Banner from "@/components/shared/home/sections/Banner";
+import { getMostSoldProducts } from "@/lib/actions/product";
 
-const ContactForm = dynamic(
-  () => import("@/components/home/sections/Contact"),
-  {
-    ssr: true,
-  }
-);
-const AboutUs = dynamic(() => import("@/components/home/sections/About"), {
-  ssr: true,
-});
-const Products = dynamic(() => import("@/components/home/sections/Product"), {
-  ssr: true,
-});
-
-export default function Home() {
+export default async function Home() {
+  const products = await getMostSoldProducts();
   return (
     <div>
+      <Hero />
       <Banner />
-      <Suspense fallback={<Loading />}>
-        <Products />
-      </Suspense>
-      <AboutUs />
-      <ContactForm />
+      <BestSeller products={products} />
     </div>
   );
 }

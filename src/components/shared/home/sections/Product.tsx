@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAllProducts } from "@/api/product";
-import { PriceSort, Product } from "@/interface/productDto";
+import { getAllProducts } from "@/lib/actions/product";
+import { PriceSort, Product } from "@/lib/validate";
 import SearchBar from "../SearchBar";
 import SortDropdown from "../SortDropdown";
 import ProductCard from "@/components/shared/ProductCard";

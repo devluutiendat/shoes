@@ -1,12 +1,14 @@
-import Api from '../../app/api/axiosClient';
+import Api from '../axiosClient';
 import { login, register } from '@/types';
 
 const API_URL = '/auth';
 
 export const loginUser = async (login : login) => {
-  try {
-    const response = await Api.post(`${API_URL}/login`, { login }, { withCredentials: true });
-    return response.data;
+  try {    
+    console.log(login);
+    
+     const response = await Api.post(`${API_URL}/login`, login );
+     return response.data;
   } catch (error) {
     console.error('Login failed:', error);
     throw error;
@@ -35,8 +37,8 @@ export const logout = async () => {
 
 export const refreshAccessToken = async () => {
   try {
-    const response = await Api.post(`${API_URL}/refresh`);
-    return response.data.accessToken;
+    const response = await Api.post(`${API_URL}/refresh`, );
+    return response.data;
   } catch (error) {
     console.error('Token refresh failed:', error);
     throw error;

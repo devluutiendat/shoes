@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
-import { ProductDetail } from "@/interface/productDto";
+import { ProductDetail } from "@/lib/validate";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/store/cartSlice";

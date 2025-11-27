@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Header from "@/components/layoutUser/Header";
+import Header from "@/components/shared/Header";
 import ReduxProvider from "@/store/provider";
+import Footer from "@/components/shared/Footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,8 +27,10 @@ export default function RootLayout({
     <div>
       <Header />
       <main className="py-14">
-        <ReduxProvider>{children}</ReduxProvider>
+        {/* <ReduxProvider>{children}</ReduxProvider> */}
+        {children}
       </main>
+      <Footer />
     </div>
   );
 }

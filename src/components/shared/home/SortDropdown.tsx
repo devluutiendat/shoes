@@ -5,7 +5,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu";
-import { PriceSort } from "@/interface/productDto";
+import { PriceSort } from "@/lib/validate";
 
 interface SortDropdownProps {
   sortOrder: PriceSort;

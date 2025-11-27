@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { clearCookies } from "@/lib/cookie";
+import { logout } from "@/lib/actions/auth";
 
 const ProfileMenu = () => {
   return (
@@ -34,7 +34,7 @@ const ProfileMenu = () => {
           transition={{ duration: 0.2 }}
         >
           <DropdownMenuItem asChild>
-            <Link href="/login" onClick={() => clearCookies()}>
+            <Link href="/login" onClick={() => logout()}>
               Logout
             </Link>
           </DropdownMenuItem>
