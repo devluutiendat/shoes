@@ -4,9 +4,7 @@ import { login, register } from '@/types';
 const API_URL = '/auth';
 
 export const loginUser = async (login : login) => {
-  try {    
-    console.log(login);
-    
+  try {        
      const response = await Api.post(`${API_URL}/login`, login );
      return response.data;
   } catch (error) {

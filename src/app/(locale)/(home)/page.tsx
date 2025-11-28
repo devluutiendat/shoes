@@ -1,6 +1,6 @@
 import BestSeller from "@/components/shared/BestSeller";
 import Hero from "@/components/shared/Hero";
-import Banner from "@/components/shared/home/sections/Banner";
+import Banner from "@/components/shared/Banner";
 import { getMostSoldProducts } from "@/lib/actions/product";
 
 export default async function Home() {

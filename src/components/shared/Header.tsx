@@ -5,6 +5,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { Menu, X } from "lucide-react";
 import { ModeToggle } from "./Theme-toggle";
 import ProfileMenu from "./Portfolio";
+import Link from "next/link";
 
 const navbar = ["Product", "Banner", "About", "Contact"];
 
@@ -58,9 +59,9 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <ModeToggle />
 
-        <div className="cursor-pointer">
+        <Link href={"/carts"} className="cursor-pointer">
           <CiShoppingCart className="text-2xl" />
-        </div>
+        </Link>
 
         <ProfileMenu />
 

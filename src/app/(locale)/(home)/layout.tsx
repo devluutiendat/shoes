@@ -26,10 +26,7 @@ export default function RootLayout({
   return (
     <div>
       <Header />
-      <main className="py-14">
-        {/* <ReduxProvider>{children}</ReduxProvider> */}
-        {children}
-      </main>
+      <main className="py-14">{children}</main>
       <Footer />
     </div>
   );

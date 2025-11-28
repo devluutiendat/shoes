@@ -1,9 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
-  const token = request.cookies.get("accessToken")?.value;
+export default function middleware(request: NextRequest) {
+  const token = request.cookies.get("refreshToken");
 
-  const publicRoutes = ["/login", "/register"];
+  const privateRoute = ["/carts", "/admin" , "/profile"];
 
   const { pathname } = request.nextUrl;
 
@@ -14,9 +14,11 @@ export function middleware(request: NextRequest) {
   ) {
     return NextResponse.next();
   }
+  
+  if (!token && privateRoute.includes(pathname)) {
+    console.log("this is ",token);
 
-  if (!token && !publicRoutes.includes(pathname)) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
   return NextResponse.next();

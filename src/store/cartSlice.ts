@@ -20,37 +20,49 @@ const initialState: CartState = {
   totalPrice: 0,
 };
 
+const recalcTotals = (state: CartState) => {
+  state.totalQuantity = state.items.reduce((sum, item) => sum + item.quantity, 0);
+  state.totalPrice = state.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+};
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
       const existingItem = state.items.find((item) => item.id === action.payload.id);
+
       if (existingItem) {
         existingItem.quantity += action.payload.quantity;
       } else {
-        state.items.push(action.payload);
+        state.items.push({
+          ...action.payload,
+          quantity: action.payload.quantity || 1,
+        });
       }
-      state.totalQuantity += action.payload.quantity;
-      state.totalPrice += action.payload.price * action.payload.quantity;
+
+      recalcTotals(state);
     },
+
     removeFromCart: (state, action: PayloadAction<string>) => {
-      const itemIndex = state.items.findIndex((item) => item.id === action.payload);
-      if (itemIndex !== -1) {
-        const item = state.items[itemIndex];
-        state.totalQuantity -= item.quantity;
-        state.totalPrice -= item.price * item.quantity;
-        state.items.splice(itemIndex, 1);
-      }
+      state.items = state.items.filter((item) => item.id !== action.payload);
+      recalcTotals(state);
     },
-    updateQuantity: (state, action: PayloadAction<{ id: string; quantity: number }>) => {
-      const item = state.items.find((item) => item.id === action.payload.id);
-      if (item) {
-        state.totalQuantity += action.payload.quantity - item.quantity;
-        state.totalPrice += (action.payload.quantity - item.quantity) * item.price;
-        item.quantity = action.payload.quantity;
+
+    updateQuantity: (state, action: PayloadAction<string>) => {
+      const item = state.items.find((item) => item.id === action.payload);
+      if (!item) return;
+
+      if (item.quantity === 1) {
+        state.items = state.items.filter((i) => i.id !== action.payload);
+      } else {
+        item.quantity -= 1;
       }
+
+      recalcTotals(state);
     },
+
+
     clearCart: (state) => {
       state.items = [];
       state.totalQuantity = 0;
@@ -59,5 +71,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, updateQuantity, clearCart } =
+  cartSlice.actions;
+
 export default cartSlice.reducer;

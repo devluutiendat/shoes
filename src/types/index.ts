@@ -20,3 +20,9 @@ export interface imageProductType{
     link:string,
     type:string
 }
+
+export interface orderType {
+    quantity:number,
+    productId:number,
+}
+
