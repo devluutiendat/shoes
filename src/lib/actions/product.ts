@@ -1,10 +1,10 @@
 import API from "../axiosClient";
 
-const API_BASE_URL = "/products";
+const API_BASE_URL = "http://localhost:5000/products";
 
 export const getMostSoldProducts = async () => {
   try {
-    const res = await fetch("http://localhost:5000/products/most-sold");
+    const res = await fetch(`${API_BASE_URL}/most-sold`);
     const products = await res.json();
     return products;
   } catch (error) {
@@ -13,6 +13,16 @@ export const getMostSoldProducts = async () => {
   }
 };
 
+export const getProductById = async (id: number) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/${id}`);
+    const product = await res.json();
+    return product;
+  } catch (error) {
+    console.error(`Failed to get product with ID ${id}:`, error);
+    throw error;
+  }
+}
 // export const createProduct = async (data: CreateProductDto) => {
 //   try {
 //     const res = await API.post(API_BASE_URL, data);
