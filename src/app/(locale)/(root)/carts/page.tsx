@@ -1,16 +1,10 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, AppDispatch } from "@/store";
-import {
-  addToCart,
-  removeFromCart,
-  updateQuantity,
-  CartItem,
-} from "@/store/cartSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 import { createOrder } from "@/lib/actions/order";
-import CartItemCard from "@/components/shared/CartItem";
-import OrderSummary from "@/components/shared/OrderSummary";
+import CartItemCard from "@/components/shared/Cart-item";
+import OrderSummary from "@/components/shared/Order-summary";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
@@ -18,20 +12,6 @@ export default function CartPage() {
   const { items, totalQuantity, totalPrice } = useSelector(
     (state: RootState) => state.cart
   );
-  const dispatch = useDispatch<AppDispatch>();
-
-  const handleDecrement = (id: string) => {
-    dispatch(updateQuantity(id));
-  };
-
-  const handleIncrement = (item: CartItem) => {
-    dispatch(addToCart(item));
-  };
-
-  const handleRemove = (id: string) => {
-    dispatch(removeFromCart(id));
-  };
-
   const handleCheckout = async () => {
     const orders = items.map((item) => ({
       productId: Number(item.id),
@@ -70,13 +50,7 @@ export default function CartPage() {
         <div className="grid gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 space-y-4">
             {items.map((item) => (
-              <CartItemCard
-                key={item.id}
-                item={item}
-                onIncrement={handleIncrement}
-                onDecrement={handleDecrement}
-                onRemove={handleRemove}
-              />
+              <CartItemCard key={item.id} item={item} />
             ))}
           </div>
 

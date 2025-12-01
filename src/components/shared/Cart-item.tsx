@@ -3,21 +3,33 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import { CartItem as ItemType } from "@/store/cartSlice";
-
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/store";
+import {
+  addToCart,
+  cartItem,
+  removeFromCart,
+  updateQuantity,
+} from "@/store/cartSlice";
 interface Props {
-  item: ItemType;
-  onIncrement: (item: ItemType) => void;
-  onDecrement: (id: string) => void;
-  onRemove: (id: string) => void;
+  item: cartItem;
 }
 
-export default function CartItem({
-  item,
-  onIncrement,
-  onDecrement,
-  onRemove,
-}: Props) {
+export default function CartItem({ item }: Props) {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleDecrement = (id: string) => {
+    dispatch(updateQuantity(id));
+  };
+
+  const handleIncrement = (item: cartItem) => {
+    dispatch(addToCart(item));
+  };
+
+  const handleRemove = (id: string) => {
+    dispatch(removeFromCart(id));
+  };
+
   return (
     <Card className="overflow-hidden">
       <div className="flex gap-6 p-6">
@@ -41,7 +53,7 @@ export default function CartItem({
             <Button
               variant="outline"
               size="sm"
-              onClick={() => onDecrement(item.id)}
+              onClick={() => handleDecrement(item.id)}
             >
               <Minus className="h-4 w-4" />
             </Button>
@@ -51,7 +63,7 @@ export default function CartItem({
             <Button
               variant="outline"
               size="sm"
-              onClick={() => onIncrement(item)}
+              onClick={() => handleIncrement(item)}
             >
               <Plus className="h-4 w-4" />
             </Button>
@@ -62,7 +74,7 @@ export default function CartItem({
           <p className="text-lg font-bold">
             ${(item.price * item.quantity).toFixed(2)}
           </p>
-          <Button variant="ghost" onClick={() => onRemove(item.id)}>
+          <Button variant="ghost" onClick={() => handleRemove(item.id)}>
             <Trash2 className="h-4 w-4" />
           </Button>
         </div>

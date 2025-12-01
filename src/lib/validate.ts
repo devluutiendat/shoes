@@ -27,10 +27,6 @@ export const registerSchema = z.object({
 //   style: z.string().min(1, "Style is required"),
 // });
 
-// export enum PriceSort {
-//   INCRE = 'asc',
-//   DCRE = 'desc',
-// }
 
 // export interface FilterProductDto {
 //   items_per_page: number;

@@ -1,4 +1,4 @@
-import BestSeller from "@/components/shared/BestSeller";
+import BestSeller from "@/components/shared/Best-seller";
 import Hero from "@/components/shared/Hero";
 import Banner from "@/components/shared/Banner";
 import { getMostSoldProducts } from "@/lib/actions/product";

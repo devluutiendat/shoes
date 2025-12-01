@@ -23,6 +23,16 @@ export const getProductById = async (id: number) => {
     throw error;
   }
 }
+  export const getAllProducts = async (filters: string) => {
+    try {
+      const res = await API.get(`${API_BASE_URL}?${filters}` );
+    return res.data;
+  } catch (error) {
+    console.error('Failed to get all products:', error);
+    throw error;
+  }
+};
+
 // export const createProduct = async (data: CreateProductDto) => {
 //   try {
 //     const res = await API.post(API_BASE_URL, data);
@@ -33,15 +43,6 @@ export const getProductById = async (id: number) => {
 //   }
 // };
 
-// export const getAllProducts = async (filters?: FilterProductDto) => {
-//   try {
-//     const res = await API.get(API_BASE_URL, { params: filters });
-//     return res.data;
-//   } catch (error) {
-//     console.error('Failed to get all products:', error);
-//     throw error;
-//   }
-// };
 
 // export const getAllProductIds = async () => {
 //   try {
