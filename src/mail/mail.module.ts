@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { forwardRef, Module } from '@nestjs/common';
+=======
+import {  Module } from '@nestjs/common';
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailService } from './mail.service';

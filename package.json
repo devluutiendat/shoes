@@ -34,7 +34,10 @@
     "@nestjs/swagger": "^11.0.3",
     "@prisma/client": "^6.4.1",
     "@types/uuid": "^10.0.0",
+<<<<<<< HEAD
     "api-query-params": "^5.4.0",
+=======
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
     "bcrypt": "^5.1.1",
     "bull": "^4.16.5",
     "cache-manager": "^6.4.0",

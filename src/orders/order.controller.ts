@@ -12,7 +12,10 @@ import {
   HttpCode,
   HttpStatus,
   UseGuards,
+<<<<<<< HEAD
   Request,
+=======
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -33,9 +36,14 @@ export class OrdersController {
   @ApiResponse({ status: 400, description: 'Bad request.' })
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   @HttpCode(HttpStatus.CREATED)
+<<<<<<< HEAD
   async create(@Body() createOrderDto: CreateOrderDto, @Request() req:any)  {
     const user = req.user.id;
     const order = await this.orderService.create(createOrderDto,user); 
+=======
+  async create(@Body() createOrderDto: CreateOrderDto) {
+    const order = await this.orderService.create(createOrderDto);
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
     return order;
   }
 
@@ -66,9 +74,14 @@ export class OrdersController {
   @ApiResponse({ status: 404, description: 'Order not found.' })
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   @HttpCode(HttpStatus.OK)
+<<<<<<< HEAD
   update(@Param('id', ParseIntPipe) id: number, @Body() updateOrderDto: UpdateOrderDto , @Request() req) {
      const userId = req.user.id;
     return this.orderService.update(id, updateOrderDto, userId );
+=======
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateOrderDto: UpdateOrderDto) {
+    return this.orderService.update(id, updateOrderDto);
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   }
 
   @Delete(':id')

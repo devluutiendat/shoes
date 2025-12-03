@@ -30,7 +30,11 @@ import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { JwtAuthGuard } from 'src/auth/passport/jwt-auth.guard';
 import { AdminGuard } from 'src/auth/passport/admin.guard';
+<<<<<<< HEAD
 import { multerConfig } from 'config/multer.config';
+=======
+import { multerConfig } from 'utils/multer';
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 
 @ApiTags('images')
 @UseGuards(JwtAuthGuard)

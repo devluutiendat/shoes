@@ -7,7 +7,11 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { promises as fs } from 'fs';
+<<<<<<< HEAD
 import { saveFile } from 'config/multer.config';
+=======
+import { saveFile } from 'utils/multer';
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 import { console } from 'inspector';
 import * as path from 'path';
 

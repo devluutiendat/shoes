@@ -6,10 +6,18 @@ import { QueueService } from 'src/queues/queue.service';
 import { MailService } from 'src/mail/mail.service';
 import { UserService } from 'src/users/user.service';
 import { QueueModule } from 'src/queues/queue.module';
+<<<<<<< HEAD
 @Module({
   imports : [forwardRef(() => QueueModule)],
   controllers: [OrdersController],
   providers: [OrderService,MailService,QueueService,PrismaService,UserService],
+=======
+import { ProductService } from 'src/products/product.service';
+@Module({
+  imports : [forwardRef(() => QueueModule)],
+  controllers: [OrdersController],
+  providers: [OrderService,MailService,QueueService,PrismaService,UserService,ProductService],
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   exports: [OrderService],
 })
 export class OrdersModule {}

@@ -18,7 +18,11 @@ export class AdminGuard implements CanActivate {
 
     if (user.email !== email) {
       throw new ForbiddenException(
+<<<<<<< HEAD
         'Access denied. Email does not match the required criteria.',
+=======
+        'Access denied. You must be an admin to perform this action.',
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
       );
     }
 

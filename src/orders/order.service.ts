@@ -3,12 +3,20 @@ import {
   Logger,
   BadRequestException,
   NotFoundException,
+<<<<<<< HEAD
+=======
+  InternalServerErrorException,
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { QueueService } from 'src/queues/queue.service';
 import { UserService } from 'src/users/user.service';
+<<<<<<< HEAD
+=======
+import { ProductService } from 'src/products/product.service';
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 
 @Injectable()
 export class OrderService {
@@ -17,6 +25,7 @@ export class OrderService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly userService: UserService,
+<<<<<<< HEAD
     private queueService: QueueService,
 
   ) {}
@@ -73,6 +82,33 @@ export class OrderService {
       );
 
       return createdOrders;
+=======
+    private readonly productService: ProductService,
+    private queueService: QueueService,
+  ) {}
+
+  async create(createOrderDto: CreateOrderDto) {
+    const { userId, productId } = createOrderDto;
+    // Check if user and product exist
+    const user = await this.userService.getUserById(userId);
+    await this.productService.getProductById(productId);
+
+    try {
+      const order = await this.prisma.orders.create({
+        data: {
+          ...createOrderDto,
+          active: false,
+        },
+      });
+
+      await this.queueService.sendVerificationEmail(
+        user.email,
+        order.userId.toString(),
+        order.id,
+      );
+
+      return order;
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
     } catch (error) {
       this.logger.error(`Error creating order: ${error.message}`, error.stack);
       throw new BadRequestException('Failed to create order.');
@@ -80,7 +116,17 @@ export class OrderService {
   }
 
   async findAll() {
+<<<<<<< HEAD
     return await this.prisma.orders.findMany();
+=======
+    try {
+      const orders = await this.prisma.orders.findMany();
+      return orders;
+    } catch (error) {
+      this.logger.error(`Error fetching orders: ${error.message}`, error.stack);
+      throw new InternalServerErrorException('Failed to fetch orders.');
+    }
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   }
 
   async getOrderById(id: number) {
@@ -94,6 +140,7 @@ export class OrderService {
     return order;
   }
 
+<<<<<<< HEAD
   async update(id: number, updateOrderDto: UpdateOrderDto, userId: number) {
     try {
       const existingOrder = await this.getOrderById(id);
@@ -107,6 +154,15 @@ export class OrderService {
           ...updateOrderDto,
           userId: userId,
         },
+=======
+  async update(id: number, updateOrderDto: UpdateOrderDto) {
+    try {
+      await this.getOrderById(id);
+
+      return await this.prisma.orders.update({
+        where: { id },
+        data: updateOrderDto,
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
       });
     } catch (error) {
       this.logger.error(
@@ -118,6 +174,7 @@ export class OrderService {
   }
 
   async remove(id: number) {
+<<<<<<< HEAD
     const order = await this.getOrderById(id);
     if (!order) {
       throw new NotFoundException(`Order with ID ${id} not found.`);
@@ -126,5 +183,19 @@ export class OrderService {
     await this.prisma.orders.delete({ where: { id } });
 
     return { message: `Order #${id} has been deleted successfully.` };
+=======
+    await this.getOrderById(id);
+
+    try {
+      await this.prisma.orders.delete({ where: { id } });
+      return { message: `Order #${id} has been deleted successfully.` };
+    } catch (error) {
+      this.logger.error(
+        `Error deleting order ${id}: ${error.message}`,
+        error.stack,
+      );
+      throw new BadRequestException('Failed to delete order.');
+    }
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   }
 }

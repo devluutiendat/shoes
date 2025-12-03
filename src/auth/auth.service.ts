@@ -61,6 +61,7 @@ export class AuthService {
   async login(email: string, password: string, res: Response) {
     const user = await this.prisma.user.findUnique({ where: { email } });
     if (!user) throw new UnauthorizedException('Invalid credentials');
+<<<<<<< HEAD
     
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) throw new UnauthorizedException('Invalid credentials');
@@ -71,6 +72,16 @@ export class AuthService {
 
     this.setAuthCookies(res, tokens.accessToken, tokens.refreshToken);
     return res.status(200).json({ message: 'Logged in successfully', admin : isAdmin });
+=======
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) throw new UnauthorizedException('Invalid credentials');
+
+    const tokens = await this.generateTokens(user);
+
+    this.setAuthCookies(res, tokens.accessToken, tokens.refreshToken);
+    return res.status(200).json({ message: 'Logged in successfully' });
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   }
 
   async refreshAccessToken(req: Request, res: Response) {
@@ -129,13 +140,21 @@ export class AuthService {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
+<<<<<<< HEAD
       maxAge: 1 * 60 * 1000, // 1 phút
+=======
+      maxAge: 1 * 60 * 1000, 
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
     });
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
+<<<<<<< HEAD
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 ngày
+=======
+      maxAge: 7 * 24 * 60 * 60 * 1000, 
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
     });
   }
 }

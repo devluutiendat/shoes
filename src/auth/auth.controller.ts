@@ -19,6 +19,10 @@ import {
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
+<<<<<<< HEAD
+=======
+  ApiBody,
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from './passport/jwt-auth.guard';
 import { Request, Response } from 'express';
@@ -27,11 +31,18 @@ import { Request, Response } from 'express';
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   @Post('register')
   @UsePipes(new ValidationPipe({ whitelist: true }))
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Register a new user' })
+<<<<<<< HEAD
+=======
+  @ApiBody({ type: RegisterDto })
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   @ApiResponse({ status: 201, description: 'User registered successfully' })
   @ApiResponse({ status: 409, description: 'Email already in use' })
   async register(@Body() registerDto: RegisterDto , @Res() res : Response) {
@@ -42,6 +53,10 @@ export class AuthController {
   @UsePipes(new ValidationPipe({ whitelist: true }))
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Login a user' })
+<<<<<<< HEAD
+=======
+  @ApiBody({ type: LoginDto })
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   @ApiResponse({ status: 200, description: 'User logged in successfully' })
   @ApiResponse({ status: 401, description: 'Invalid credentials' })
   async login(@Body() loginDto: LoginDto ,@Res() res : Response) {

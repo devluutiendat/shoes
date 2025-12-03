@@ -1,6 +1,10 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
+<<<<<<< HEAD
+=======
+import { v4 as uuidv4 } from 'uuid';
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 
 @Injectable()
 export class QueueService {
@@ -9,6 +13,7 @@ export class QueueService {
   constructor(@InjectQueue('emailQueue') private emailQueue: Queue) {}
 
   async sendVerificationEmail(
+<<<<<<< HEAD
     email: string,
     userId: string,
     orderIds: number[],
@@ -24,6 +29,19 @@ export class QueueService {
         'check_activation',
         {  userId, email, name, orderIds}, 
         { delay: 5 * 60 * 1000 },
+=======
+    email: string, userId: string,orderId:number
+    ) {
+      const code = uuidv4();
+    try {
+      await this.emailQueue.add('send_email', { email, code });
+      this.logger.log(`Verification email queued for: ${email}`);
+      
+      await this.emailQueue.add(
+        'check_activation',
+        { email, userId ,orderId},
+        { delay: 5*60*1000 },
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
       );
       this.logger.log(`Activation check queued for: ${email}`);
     } catch (error) {

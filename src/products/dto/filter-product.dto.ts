@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { Transform, Type } from 'class-transformer';
 import { IsInt, IsString, IsOptional, IsEnum, IsArray } from 'class-validator';
+=======
+import { Type } from 'class-transformer';
+import { IsInt, IsString, IsOptional, IsEnum } from 'class-validator';
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export enum PriceSort {
@@ -13,7 +18,10 @@ export class FilterProductDto {
     example: 10,
   })
   @IsInt()
+<<<<<<< HEAD
   @IsOptional()
+=======
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   @Type(() => Number)
   items_per_page: number;
 
@@ -23,7 +31,10 @@ export class FilterProductDto {
   })
   @IsInt()
   @Type(() => Number)
+<<<<<<< HEAD
   @IsOptional()
+=======
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   page: number;
 
   @ApiPropertyOptional({
@@ -35,6 +46,7 @@ export class FilterProductDto {
   name?: string;
 
   @ApiPropertyOptional({
+<<<<<<< HEAD
     description: 'Product style to filter',
     example: 'women',
   })
@@ -47,6 +59,8 @@ export class FilterProductDto {
   styles?: string[]; 
 
   @ApiPropertyOptional({
+=======
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
     description: 'Sorting order of the price (asc or desc)',
     enum: PriceSort,
     example: PriceSort.INCRE,

@@ -26,19 +26,32 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
+<<<<<<< HEAD
 import { get } from 'http';
 
 @ApiTags('products')
+=======
+
+@ApiTags('products')
+@UseGuards(JwtAuthGuard)
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductService) {}
 
   @Post()
+<<<<<<< HEAD
   @UseGuards(JwtAuthGuard)
+=======
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   @ApiOperation({ summary: 'Create a new product' })
   @ApiBody({ type: CreateProductDto })
   @ApiResponse({ status: 201, description: 'Product created successfully.' })
   @ApiResponse({ status: 400, description: 'Bad request.' })
+<<<<<<< HEAD
+=======
+  @ApiResponse({status:  500, description: 'Internal server error.'})
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   @UseGuards(AdminGuard)
   @UsePipes(new ValidationPipe({ whitelist: true }))
   @HttpCode(HttpStatus.CREATED)
@@ -72,6 +85,7 @@ export class ProductsController {
   @ApiResponse({ status: 404, description: 'Product not found.' })
   @HttpCode(HttpStatus.OK)
   findOne(@Param('id') id: number) {
+<<<<<<< HEAD
     return this.productsService.findById(+id);
   }
 
@@ -81,6 +95,9 @@ export class ProductsController {
   @HttpCode(HttpStatus.OK)
   getProductIds() {
     return this.productsService.getAllProductIds();
+=======
+    return this.productsService.getProductById(+id);
+>>>>>>> 0b6316ac15dc8cb2d493227cee067b1781790869
   }
 
   @Put(':id')
