@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  email        String    @unique
+  password     String
+  phone        String?
+  name         String
+  status       Int       @default(1)
+  refreshToken String?
+  reviews      Review[]
+  orders       Orders[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+}
+
+model Orders {
+  id        Int      @id @default(autoincrement())
+  quantity  Int
+  active    Boolean
+  createdAt DateTime @default(now())
+
+  productId Int
+  userId    Int
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review  Review?
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  style       String
+  description String
+  price       Int
+  images      Image[]
+  reviews     Review[]
+  orders      Orders[]
+}
+
+model Review {
+  id        Int       @id @default(autoincrement())
+  rating    Int
+  comment   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  productId Int
+  userId    Int
+  orderId   Int       @unique
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order   Orders  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  link      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  type      String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
