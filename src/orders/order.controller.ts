@@ -19,6 +19,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/passport/jwt-auth.guard';
+import { AdminGuard } from 'src/auth/passport/admin.guard';
 
 @ApiTags('orders')
 @UseGuards(JwtAuthGuard)
@@ -44,8 +45,23 @@ export class OrdersController {
   @ApiResponse({ status: 200, description: 'Return all orders.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @HttpCode(HttpStatus.OK)
+  @UseGuards(AdminGuard)
   findAll() {
-    return this.orderService.findAll();
+    const orders = this.orderService.findAll();
+    return orders
+  }
+
+
+  
+  @Get("/user")
+  @ApiOperation({ summary: 'Get all user orders ' })
+  @ApiResponse({ status: 200, description: 'Return all user orders.' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @HttpCode(HttpStatus.OK)
+  async getOrdersByUser(@Request() req:any) {
+    const userId = req.user.id;
+    const orders = await this.orderService.getOrdersByUser(userId);
+    return orders
   }
 
   @Get(':id')

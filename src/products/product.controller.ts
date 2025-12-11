@@ -26,7 +26,6 @@ import {
   ApiParam,
   ApiBody,
 } from '@nestjs/swagger';
-import { get } from 'http';
 
 @ApiTags('products')
 @Controller('products')
@@ -64,6 +63,14 @@ export class ProductsController {
   async getMostSoldProducts() {
     return this.productsService.getMostSoldProducts();
   }
+  
+    @Get('allProduct')
+    @ApiOperation({ summary: 'Get product IDs' })
+    @ApiResponse({ status: 200, description: 'Return product IDs.' })
+    @HttpCode(HttpStatus.OK)
+    findProducts() {
+      return this.productsService.getAllProduct();
+    }
 
   @Get(':id')
   @ApiOperation({ summary: 'Get product by ID' })
@@ -73,14 +80,6 @@ export class ProductsController {
   @HttpCode(HttpStatus.OK)
   findOne(@Param('id') id: number) {
     return this.productsService.findById(+id);
-  }
-
-  @Get('productIds')
-  @ApiOperation({ summary: 'Get product IDs' })
-  @ApiResponse({ status: 200, description: 'Return product IDs.' })
-  @HttpCode(HttpStatus.OK)
-  getProductIds() {
-    return this.productsService.getAllProductIds();
   }
 
   @Put(':id')

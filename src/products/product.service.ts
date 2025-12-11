@@ -62,12 +62,18 @@ export class ProductService {
     }
   }
 
-  async getAllProductIds() {
+  async getAllProduct() {
     try {
       const products = await this.prisma.product.findMany({
-        select: { id: true },
+        include:{
+          images:true,
+            _count: {
+            select: {
+              orders: true
+            }
+        }}
       });
-      return products.map((product) => product.id);
+      return products;
     } catch (error) {
       console.error('Error fetching product IDs:', error);
       throw new InternalServerErrorException('Failed to fetch product IDs');

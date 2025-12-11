@@ -18,10 +18,9 @@ export class OrderService {
     private readonly prisma: PrismaService,
     private readonly userService: UserService,
     private queueService: QueueService,
-
   ) {}
 
-  async create(createOrderDto: CreateOrderDto, userId : number) {
+  async create(createOrderDto: CreateOrderDto, userId: number) {
     const { productOrders } = createOrderDto;
 
     // Validate userId and productOrders exist
@@ -80,7 +79,28 @@ export class OrderService {
   }
 
   async findAll() {
-    return await this.prisma.orders.findMany();
+    return await this.prisma.orders.findMany({
+      include:{
+        product:true
+      }
+    });
+  }
+
+  async getOrdersByUser(userId: number) {
+    if (!userId) {
+      throw new BadRequestException('userId are required');
+    }
+
+    const orders = await this.prisma.orders.findMany({
+      where: {
+        userId,
+      },
+      include:{
+        product:true,
+      }
+    });
+
+    return orders;
   }
 
   async getOrderById(id: number) {
