@@ -23,9 +23,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navbar = [
+    {
+      name: "Product",
+      link: "localhost:3000/",
+    },
+    {
+      name: "Banner",
+      link: "localhost:/3000/",
+    },
+    {
+      name: "About",
+      link: "localhost:/3000/",
+    },
+    {
+      name: "Contact",
+      link: "localhost:/3000/",
+    },
+  ];
   return (
     <div>
-      <Header />
+      <Header navbar={navbar} />
       <main className="py-14">{children}</main>
       <Footer />
     </div>

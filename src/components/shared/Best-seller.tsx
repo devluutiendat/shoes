@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { productType } from "@/types";
-import ProductCard from "./ProductCard";
+import ProductCard from "./Product-card";
 import SpecialItem from "./Special-item";
 
 const ITEMS_PER_PAGE = 5;

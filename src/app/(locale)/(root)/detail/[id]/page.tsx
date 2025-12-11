@@ -1,15 +1,9 @@
 import AddCartButton from "@/components/shared/AddCartButton";
-import ProductCard from "@/components/shared/ProductCard";
+import ProductCard from "@/components/shared/Product-card";
 import Thumbnail from "@/components/shared/Thumbnail";
 import { getMostSoldProducts, getProductById } from "@/lib/actions/product";
 import { productType } from "@/types";
 
-export interface ProductImage {
-  id: number;
-  productId: number;
-  link: string;
-  type: string;
-}
 export default async function Page({
   params,
 }: {

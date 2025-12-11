@@ -1,6 +1,6 @@
-import ProductCard from "@/components/shared/ProductCard";
+import ProductCard from "@/components/shared/Product-card";
 import Search from "@/components/shared/Search";
-import { getAllProducts } from "@/lib/actions/product";
+import { getProducts } from "@/lib/actions/product";
 import { productType } from "@/types";
 
 import React from "react";
@@ -26,7 +26,7 @@ export default async function Page(props: {
   }
 
   const queryString = params.toString();
-  const product = await getAllProducts(queryString);
+  const product = await getProducts(queryString);
   console.log(product);
 
   return (

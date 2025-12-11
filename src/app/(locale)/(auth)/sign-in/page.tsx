@@ -11,8 +11,13 @@ import { useRouter } from "next/navigation";
 import { loginSchema } from "@/lib/validate";
 import { loginUser } from "@/lib/actions/auth";
 import { login } from "@/types";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { setAdmin } from "@/store/adminSlice";
 
 export default function LoginForm() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { isAdmin } = useSelector((state: RootState) => state.admin);
   const {
     register,
     handleSubmit,
@@ -26,10 +31,12 @@ export default function LoginForm() {
 
   const onSubmit = async (data: login) => {
     try {
-      await loginUser(data);
+      const user = await loginUser(data);
+      dispatch(setAdmin(user.admin));
       setLoading(true);
       toast.success("Login successful!");
-      router.push("/");
+      if (user.admin === true) router.push("/admin/products");
+      else router.push("/");
     } catch (error: any) {
       toast.error(error.resonpse?.data?.message || "Invalid credentials!");
     } finally {

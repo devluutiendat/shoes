@@ -39,7 +39,7 @@ const ProfileMenu = () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/portfolio">Portfolio</Link>
+            <Link href="/admin/orders">Portfolio</Link>
           </DropdownMenuItem>
         </motion.div>
       </DropdownMenuContent>

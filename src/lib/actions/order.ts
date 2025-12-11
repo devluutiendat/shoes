@@ -9,7 +9,31 @@ export const createOrder = async (data: orderType[]) => {
         });
         return res.data;
     } catch (error) {
-        console.error('Login failed:', error);
+        console.error('create order failed:', error);
         throw error;
     }
 }
+
+export const getAllOrders = async () => {
+    try {
+        const res = await API.get(`${API_URL}`);
+        return res.data;
+    } catch (error) {
+        console.error('create order failed:', error);
+        throw error;
+    }
+}
+
+
+export const getUserOrders = async () =>{
+    try {
+        const res = await API.get(`${API_URL}/user`)
+        console.log(res);
+        
+        return res.data;
+    } catch (error) {
+        console.log("get user orders failed");
+        throw error
+    }
+}
+

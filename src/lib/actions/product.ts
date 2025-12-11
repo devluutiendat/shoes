@@ -44,15 +44,15 @@ export const getProductById = async (id: number) => {
 // };
 
 
-// export const getAllProductIds = async () => {
-//   try {
-//     const res = await API.get(`${API_BASE_URL}/productIds`);
-//     return res.data;
-//   } catch (error) {
-//     console.error('Failed to get all product IDs:', error);
-//     throw error;
-//   }
-// }
+export const getProducts = async () => {
+  try {
+    const res = await API.get(`${API_BASE_URL}/allProduct`)
+    return res.data;
+  } catch (error) {
+    console.error('Failed to get all product IDs:', error);
+    throw error;
+  }
+}
 // export const updateProduct = async (id: number, data: UpdateProductDto) => {
 //   try {
 //     const res = await API.put(`${API_BASE_URL}/${id}`, data);

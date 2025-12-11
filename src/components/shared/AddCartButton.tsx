@@ -1,12 +1,12 @@
 "use client";
 import { AppDispatch } from "@/store";
-import { addToCart, CartItem } from "@/store/cartSlice";
+import { addToCart, cartItem } from "@/store/cartSlice";
 import React from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 
 interface buttonProps {
-  item: CartItem;
+  item: cartItem;
 }
 
 const AddCartButton = ({ item }: buttonProps) => {

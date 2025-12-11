@@ -7,9 +7,15 @@ import { ModeToggle } from "./Theme-toggle";
 import ProfileMenu from "./Portfolio";
 import Link from "next/link";
 
-const navbar = ["Product", "Banner", "About", "Contact"];
+interface navbarType {
+  name: string;
+  link: string;
+}
+interface headerType {
+  navbar: navbarType[];
+}
 
-const Header = () => {
+const Header = ({ navbar }: headerType) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), []);
@@ -27,16 +33,6 @@ const Header = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [menuOpen]);
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault();
-    const href = e.currentTarget.href.split("#")[1];
-    window.scrollTo({
-      top: document.getElementById(href)?.offsetTop,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <header className="fixed top-0 w-full bg-white dark:bg-black shadow-lg p-4 flex items-center justify-between z-50">
       <div className="flex items-center">
@@ -46,12 +42,11 @@ const Header = () => {
       <nav className="hidden md:flex space-x-6">
         {navbar.map((item) => (
           <a
-            key={item}
-            onClick={handleScroll}
-            href={`#${item}`}
+            key={item.name}
+            href={item.link}
             className="text-gray-700 dark:text-gray-200 hover:text-blue-500"
           >
-            {item}
+            {item.name}
           </a>
         ))}
       </nav>

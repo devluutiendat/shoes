@@ -1,10 +1,10 @@
 "use client";
-import { ProductImage } from "@/app/(locale)/(root)/detail/[id]/page";
+import { imageProductType } from "@/types";
 import Image from "next/image";
 import { useState } from "react";
 
 interface Thumbnail {
-  images: ProductImage[];
+  images: imageProductType[];
   name: string;
 }
 const Thumbnail = ({ images, name }: Thumbnail) => {

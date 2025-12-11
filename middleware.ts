@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 export default function middleware(request: NextRequest) {
   const token = request.cookies.get("refreshToken");
 
-  const privateRoute = ["/carts", "/admin" , "/profile"];
+  const privateRoute = ["/carts", "/admin" ];
 
   const { pathname } = request.nextUrl;
 
@@ -16,7 +16,6 @@ export default function middleware(request: NextRequest) {
   }
   
   if (!token && privateRoute.includes(pathname)) {
-    console.log("this is ",token);
 
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
